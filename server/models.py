@@ -18,6 +18,8 @@ class Customer(db.Model):
     name = db.Column(db.String)
     
     reviews=db.relationship('Review',back_populates='customer')
+
+    items=association_proxy('reviews','item',creator=lambda item_obj:Review(item=item_obj))
     def __repr__(self):
         return f'<Customer {self.id}, {self.name}>'
 
@@ -30,6 +32,7 @@ class Item(db.Model):
     price = db.Column(db.Float)
     
     reviews=db.relationship('Review',back_populates='item')
+    customers=association_proxy('reviews','customer',creator=lambda customer_obj:Review(customer=customer_obj))
     def __repr__(self):
         return f'<Item {self.id}, {self.name}, {self.price}>'
 
