@@ -1,7 +1,6 @@
 from app import app, db
 from server.models import Customer, Item, Review
 
-
 class TestSerialization:
     '''models in models.py'''
 
@@ -51,6 +50,8 @@ class TestSerialization:
             db.session.commit()
 
             review_dict = r.to_dict()
+           
+
             assert review_dict['id']
             assert review_dict['customer']
             assert review_dict['item']
